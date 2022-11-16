@@ -15,7 +15,7 @@ from PyQt5.QtCore import QDateTime, QTimer
 from PyQt5.QtWidgets import QDialog, QMainWindow
 import datetime
 
-import LuRu
+
 
 
 class Ui_Start_Window(object):
@@ -71,8 +71,8 @@ class Ui_Start_Window(object):
         self.retranslateUi(mainWindow)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
-        #self.pushButton.clicked.connect(self.handleCalc1)
-        self.pushButton_2.clicked.connect(self.handleCalc2)
+
+
 
     def retranslateUi(self, mainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -91,11 +91,5 @@ class Ui_Start_Window(object):
 
 
 
-
-
-
-    # 打卡签到按钮被点击
-    def handleCalc2(self):
-        pass
 
 
