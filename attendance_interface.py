@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+
+
+
 import Recognize_face
 import cv2 as cv
+from PyQt5.QtGui import QTextCharFormat
+from PyQt5.Qt import QPainter
 # Form implementation generated from reading ui file 'attendance_interface.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
@@ -25,6 +30,11 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QCameraViewfinder(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(30, 60, 751, 421))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.widget.setFont(font)
         self.widget.setObjectName("widget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(340, 497, 101, 31))
@@ -32,25 +42,32 @@ class Ui_MainWindow(object):
         font.setPointSize(15)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(260, 10, 66, 33))
+        self.widget1 = QtWidgets.QWidget(self.centralwidget)
+        self.widget1.setGeometry(QtCore.QRect(270, 10, 301, 41))
+        self.widget1.setObjectName("widget1")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget1)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label = QtWidgets.QLabel(self.widget1)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(410, 10, 132, 33))
+        self.horizontalLayout.addWidget(self.label)
+        self.textEdit = QtWidgets.QTextEdit(self.widget1)
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.textEdit.setFont(font)
+        self.textEdit.setObjectName("textEdit")
+        self.horizontalLayout.addWidget(self.textEdit)
+        self.label_2 = QtWidgets.QLabel(self.widget1)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(360, 10, 17, 33))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        self.label_3.setFont(font)
-        self.label_3.setText("")
-        self.label_3.setObjectName("label_3")
+        self.horizontalLayout.addWidget(self.label_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
@@ -70,11 +87,28 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "工号"))
         self.label_2.setText(_translate("MainWindow", "签到成功"))
 
+    def outputWritten(self, text):
+        self.textEdit.clear()
+        cursor = self.textEdit.textCursor()
+        cursor.movePosition(QtGui.QTextCursor.End)
+        cursor.insertText(text)
+        self.textEdit.setTextCursor(cursor)
+        self.textEdit.ensureCursorVisible()
+
+
 from PyQt5.QtMultimediaWidgets import QCameraViewfinder
 
 
 
+class mywindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super(mywindow, self).__init__()
+        self.setupUi(self)
 
 
-
-
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = mywindow()
+    window.outputWritten("4")
+    window.show()
+    sys.exit(app.exec_())

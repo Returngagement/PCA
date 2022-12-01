@@ -53,11 +53,12 @@ class mywindow(QtWidgets.QMainWindow, attendance_interface.Ui_MainWindow):
         face = Find_face.Find_faces(img1)
         face1 = cv.resize(face, (112, 92))
         res = Recognize_face.Face_recognize(face1)
+        self.outputWritten(str(res))
         if len(str(res)) == 0:
-            print("打开失败")
+            print("打卡失败")
         else:
             print("工号", res, "打卡成功")
-            self.close()
+            # self.close()
         self.capture.imageCaptured.disconnect(self.message_save)
 
 if __name__ == '__main__':
